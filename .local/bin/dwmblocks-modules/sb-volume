@@ -1,0 +1,35 @@
+#!/bin/sh
+
+
+sex="^c#FFFFFF^^r0,0,10,20^^f20^ aaaa"
+volume=0
+is_done=0
+
+get_volume() {
+    if [ $is_done -eq 0 ]; then
+        volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -1 | sed 's/%//')
+        is_done=1
+    fi
+    echo $volume
+}
+
+case $BLOCK_BUTTON in
+	1) printf "Left Click"; sex="yoy" ;;
+    2) printf "Middle Click" ;;
+    3) printf "Right Click" ;;
+    4) pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send -u low -r 999 Volume $(get_volume)% -h int:value:$(get_volume);;
+    5) pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send -u low -r 999 Volume $(get_volume)% -h int:value:$(get_volume);;
+	6) code "$0" ;;
+esac
+
+emoji="🔈"
+#🔈 🔉 🔊
+
+if [ "$(get_volume)" -gt 66 ]; then
+    emoji="🔊"
+elif [ "$(get_volume)" -gt 33 ]; then
+    emoji="🔉"
+fi
+
+
+printf "${emoji} $(get_volume)%%"

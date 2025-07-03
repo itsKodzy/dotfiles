@@ -1,0 +1,12 @@
+#!/bin/sh
+
+orphans=$(pacman -Qdtq | wc -l)
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e "yay" ;;
+    # 2) echo "Middle Click" ;;
+    3) if [ $orphans -ne 0 ]; then setsid -f "$TERMINAL" -e sh -c "pacman -Qdtq | yay -Rns -"; fi ;;
+	6) code "$0" ;;
+esac
+
+echo "📬 $(yay -Qu | wc -l) | 🗑️ ${orphans}"

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	# 1) printf "Left Click" ;;
+    # 2) printf "Middle Click" ;;
+    # 3) printf "Right Click" ;;
+    # 4) printf "Scroll Up" ;;
+    # 5) printf "Scroll Down" ;;
+	6) code "$0" ;;
+esac

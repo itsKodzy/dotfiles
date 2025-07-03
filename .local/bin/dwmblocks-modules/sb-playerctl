@@ -1,0 +1,19 @@
+#!/bin/sh
+
+artist=$(playerctl -p spotify metadata artist)
+title=$(playerctl -p spotify metadata title)
+image_url=$(playerctl -p spotify metadata mpris:artUrl)
+img_path="/tmp/sb-playerctl-image.jpg"
+
+# echo $image_url
+
+case $BLOCK_BUTTON in
+	1) curl -s $image_url -o $img_path && notify-send -u low -i $img_path "$artist - $title" && rm $img_path ;;
+    # 2) printf "Middle Click" ;;
+    # 3) printf "Right Click" ;;
+    # 4) printf "Scroll Up" ;;
+    # 5) printf "Scroll Down" ;;
+	6) code "$0" ;;
+esac
+
+printf "$artist - $title"
