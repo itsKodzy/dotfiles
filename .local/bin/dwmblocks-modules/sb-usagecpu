@@ -9,4 +9,5 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# sensors | awk '/Core 0/ {print "🌡" $3}'
+# Might not be thermal_zone3 on other PCs, so it's better to check every thermal_zone* to find the real temp. Idk of a less hacky way to query cpu temperature
+printf "🌡 $(($(cat /sys/class/thermal/thermal_zone3/temp) / 1000))°C"
