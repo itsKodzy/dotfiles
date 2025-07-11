@@ -1,6 +1,3 @@
-# dotsies
-My personal dots files.
-
 # Copyright
 Materials in this repository may include work from the following users:
 
